@@ -3,7 +3,7 @@ from turtle import pos
 from typing import Any, List, Optional
 import random
 
-from toml_parser import ConfigParser
+from utils import ConfigParser
 from robot import Robot
 
 
