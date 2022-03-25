@@ -1,8 +1,8 @@
 title='Example map'
 
 [sim]
-    epoch=1
-    user_code='./lib.a.cpp.so'
+    epoch=2
+    user_code='./lib.a_star.cpp.so'
 
 [obstacle]
     x=[1,5,1]
