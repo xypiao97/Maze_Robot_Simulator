@@ -3,22 +3,12 @@ from turtle import pos
 from typing import Any, List, Optional
 import random
 
-from .utils import ConfigParser
 from .robot import Robot
 
 
 blocked: int = inf
 non_blocked: int = 0
 robot_pos: int = 82
-
-
-class Representation_Map:
-    @classmethod
-    def show(cls, near_map: List):
-        print("-" * 20)
-        for col in near_map:
-            print(col)
-        print("-" * 20)
 
 
 class _Map:
@@ -89,10 +79,18 @@ class _Map:
 
 
 class Simul_Map(_Map):
+    pre_robot_x: int
+    pre_robot_y: int
+
     def __init__(self, x_axis, y_axis, obs_pos) -> None:
         super().__init__(x_axis, y_axis, obs_pos)
 
+    def init_update(self, robot: Robot):
+        self.blocks[robot.y][robot.x] = robot_pos
+
     def get_map_info(self, robot: Robot):
+        self.pre_robot_x = robot.x
+        self.pre_robot_y = robot.y
         near_map = [ [0, 0, 0], [0, 0, 0], [0, 0, 0] ]
 
         for y in range(3):
@@ -110,4 +108,6 @@ class Simul_Map(_Map):
         return near_map
 
     def update(self, new_robot_x: int, new_robot_y: int):
-        pass
+        self.blocks[self.pre_robot_y][self.pre_robot_x] = non_blocked
+        self.blocks[new_robot_y][new_robot_x] = robot_pos
+

@@ -1,8 +1,9 @@
 from typing import Any, List, Optional
 
 from .utils import ConfigParser
-from .simul_map import Simul_Map, Representation_Map
+from .simul_map import Simul_Map
 from .robot import Robot
+from .view import Representation_Map
 
 class Simulator:
     def __init__(
@@ -31,8 +32,10 @@ class Simulator:
             obs_position.append( (x, y) )
 
         self.simul_map = Simul_Map( self.config.data.size.x, self.config.data.size.y, obs_position )
-        self.robot = Robot( self.config.data.robot.x, self.config.data.robot.y, self.config.data.robot.num_sensor )
+        self.robot = Robot( self.config.data.robot.x, self.config.data.robot.y, self.config.data.robot.num_sensor, self.config.data.sim.user_code )
         self.epochs = self.config.data.sim.epoch
+
+        self.simul_map.init_update( self.robot )
 
     def simulation(self):
         for e in range(self.epochs):
@@ -40,7 +43,7 @@ class Simulator:
 
     def _epoch_simulation(self):
         current_map = self.simul_map.get_map_info(self.robot)
-        Representation_Map.show( current_map )
-        # new_x, new_y = self.robot.run(current_map)
-        # self.simul_map.update( new_x, new_y )
+        Representation_Map.show(current_map)
+        new_x, new_y = self.robot.run(current_map)
+        self.simul_map.update( new_x, new_y )
 
