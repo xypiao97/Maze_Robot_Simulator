@@ -1,0 +1,17 @@
+title='Example map'
+
+[sim]
+    epoch=5
+
+[obstacle]
+    x=[1,5,1]
+    y=[1,2,3]
+
+[size]
+    x=10
+    y=10
+
+[robot]
+    num_sensor=3
+    x=0
+    y=0

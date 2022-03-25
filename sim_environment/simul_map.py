@@ -3,12 +3,22 @@ from turtle import pos
 from typing import Any, List, Optional
 import random
 
-from utils import ConfigParser
-from robot import Robot
+from .utils import ConfigParser
+from .robot import Robot
 
 
 blocked: int = inf
 non_blocked: int = 0
+robot_pos: int = 82
+
+
+class Representation_Map:
+    @classmethod
+    def show(cls, near_map: List):
+        print("-" * 20)
+        for col in near_map:
+            print(col)
+        print("-" * 20)
 
 
 class _Map:
@@ -22,11 +32,9 @@ class _Map:
 
     def __init__(
         self,
-        user_x: int, user_y:int,
         x_axis: int = 10, y_axis: int = 10,
         config_file: Optional[List] = None
     ) -> None:
-        self.user = Robot(user_x, user_y)
         self.x_size = x_axis
         self.y_size = y_axis
         self.total_blocks = x_axis * y_axis
@@ -81,36 +89,25 @@ class _Map:
 
 
 class Simul_Map(_Map):
-    def __init__(self, path: Optional[str] = None) -> None:
-        user_x, user_y, x_axis, y_axis, obs_pos = self._config_json(path)
-        super().__init__(user_x, user_y, x_axis, y_axis, obs_pos)
+    def __init__(self, x_axis, y_axis, obs_pos) -> None:
+        super().__init__(x_axis, y_axis, obs_pos)
 
-    def _config_json(self, path: Optional[str]):
-        if path == None:
-            print("[Creating new simulation map] The type of Map code: Random!")
-            return 0, 0, 10, 10, None
-        else:
-            '''
-                Configuration of toml file
-                ---
-                    [size]
-                        x = 10
-                        y = 10
-                    [obstacle]
-                        x = [1, 3, 9]
-                        y = [2, 3, 1]
-                    [user]
-                        x = 0
-                        y = 0
-            '''
-            print("[Creating new simulation map] The type of Map code: Static!")
-            config = ConfigParser.parse(path)
-            obs_position = []
-            for x, y in zip(config.obstacle.x, config.obstacle.y):
-                obs_position.append( (x, y) )
+    def get_map_info(self, robot: Robot):
+        near_map = [ [0, 0, 0], [0, 0, 0], [0, 0, 0] ]
 
-            return config.user.x, config.user.y, config.size.x, config.size.y, obs_position
+        for y in range(3):
+            _y = y - 1
+            for x in range(3):
+                _x = x - 1
+                try:
+                    near_map[y][x] = self.blocks[robot.y + _y][robot.x + _x]
+                    if robot.x + _x < 0:
+                        near_map[y][x] = blocked
+                    elif robot.y + _y < 0:
+                        near_map[y][x] = blocked
+                except IndexError:
+                    near_map[y][x] = blocked
+        return near_map
 
-    def simulation(self):
-        
+    def update(self, new_robot_x: int, new_robot_y: int):
         pass

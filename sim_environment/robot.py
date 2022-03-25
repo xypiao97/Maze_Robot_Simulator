@@ -1,7 +1,7 @@
 from math import inf
 from typing import List
 
-from interface import _Interface
+from .interface import _Interface
 
 
 detected: int = inf
