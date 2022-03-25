@@ -3,13 +3,16 @@ Design by PXY
 
 ## Overview
 - MRS simulator is a simple simulator to simulate or evaluate 'A star' algorithm in Arduino project (such as a robot has to escape from a large Maze).
-- Users only need to focus on c++ coding in `codes/` folder, do not need to modify simulator source code.
+- Users only need to focus on C++ coding in `codes/` folder, do not need to modify simulator source code.
+- This simulator is based on Python language and has an interface to communicate between C++ and Python.
+- In addition, this simulator also supports simple visualizations for users to analyze easily.
 
 ## Install
 Recommand env: Anaconda
 ```
-$ conda env crate -f maze_env.yaml
-$ conda activate simulation
+(base) $ conda env crate -f maze_env.yaml
+(base) $ conda activate simulation
+(simulation) $ 
 ```
 
 ## How to use
