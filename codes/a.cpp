@@ -1,5 +1,8 @@
 #include<iostream>
 #include<stdio.h>
+#include<tuple>
+
+using namespace std;
 
 class Calling{
     public :
@@ -17,8 +20,8 @@ extern "C" {
     void Calling_func(Calling* call) { call -> func(); }
 
     int algorithm(int a, int b) {
-        printf("Arg0: %d, Arg1: %d\n", a, b);
-        return 0;
+        int c = a * 100 + b * 10 + (a+0);
+        return c;
     }
 }
 

@@ -1,7 +1,7 @@
 from math import inf
 from typing import List
 
-from .interface import _Interface
+from .interface import Interface
 from .utils.types import FORWARD
 from .sensor import IR_Sensor
 from .cls import _Robot_Unit
@@ -10,13 +10,13 @@ from .cls import _Robot_Unit
 class Robot(_Robot_Unit):
     num_sensor: int
     sensors: List[IR_Sensor]
-    interfacing: _Interface
+    interfacing: Interface
 
     def __init__(self, x: int, y: int, num_sensor: int = 3, user_code_path: str = None) -> None:
         super().__init__(x, y, FORWARD)
         self.sensors = [ IR_Sensor(dir) for dir in range(num_sensor) ]
         self.num_sensor = num_sensor
-        self.interfacing = _Interface(user_code_path)
+        self.interfacing = Interface(user_code_path)
 
     def run(self, near_map: List):
         '''
@@ -37,6 +37,7 @@ class Robot(_Robot_Unit):
 
         # Communication C++ code
         _new_robot_head, _new_robot_x, _new_robot_y = self.interfacing(self.sensors)
+        print("Recv:", _new_robot_head, _new_robot_x, _new_robot_y)
         self.head = _new_robot_head
 
         return _new_robot_x, _new_robot_y
