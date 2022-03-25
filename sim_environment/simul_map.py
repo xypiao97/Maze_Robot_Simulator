@@ -4,11 +4,7 @@ from typing import Any, List, Optional
 import random
 
 from .robot import Robot
-
-
-blocked: int = inf
-non_blocked: int = 0
-robot_pos: int = 82
+from .utils.types import blocked, non_blocked, robot_pos
 
 
 class _Map:

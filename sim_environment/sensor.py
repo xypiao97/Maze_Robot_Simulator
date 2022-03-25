@@ -1,7 +1,7 @@
 from typing import List
 
 from .cls import _Robot_Unit
-from .types import RIGHT, FORWARD
+from .utils.types import RIGHT, FORWARD
 
 class IR_Sensor:
     '''

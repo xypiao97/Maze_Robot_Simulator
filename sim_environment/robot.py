@@ -2,7 +2,7 @@ from math import inf
 from typing import List
 
 from .interface import _Interface
-from .types import FORWARD
+from .utils.types import FORWARD
 from .sensor import IR_Sensor
 from .cls import _Robot_Unit
 

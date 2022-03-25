@@ -3,7 +3,7 @@ from typing import Any, List, Optional
 from .utils import ConfigParser
 from .simul_map import Simul_Map
 from .robot import Robot
-from .view import Representation_Map
+from .utils.view import Representation_Map
 
 class Simulator:
     def __init__(
@@ -39,11 +39,11 @@ class Simulator:
 
     def simulation(self):
         for e in range(self.epochs):
-            self._epoch_simulation()
+            self._epoch_simulation(e)
 
-    def _epoch_simulation(self):
+    def _epoch_simulation(self, epoch: int):
         current_map = self.simul_map.get_map_info(self.robot)
-        Representation_Map.show(current_map)
+        Representation_Map.show(epoch, self.simul_map.blocks)
         new_x, new_y = self.robot.run(current_map)
         self.simul_map.update( new_x, new_y )
 
