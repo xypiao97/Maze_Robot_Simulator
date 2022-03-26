@@ -56,5 +56,9 @@ class Simulator:
     def _epoch_simulation(self, epoch: int, viewer: bool):
         current_map = self.simul_map.get_map_info(self.robot)
         new_x, new_y = self.robot.run(current_map, viewer)
-        self.simul_map.update( new_x, new_y )
+        error = self.simul_map.update( new_x, new_y )
+
+        if error:
+            Representation_Map.show( epoch, self.simul_map.blocks )
+            raise ValueError(f"[Simulation] CRUSH!!!")
 

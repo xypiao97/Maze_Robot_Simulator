@@ -4,7 +4,7 @@ from typing import Any, List, Optional
 import random
 
 from .robot import Robot
-from .utils.types import blocked, non_blocked, robot_pos
+from .utils.types import *
 
 
 class _Map:
@@ -83,6 +83,7 @@ class Simul_Map(_Map):
 
     def init_update(self, robot: Robot):
         self.blocks[robot.cur_pos.y][robot.cur_pos.x] = robot_pos
+        self.blocks[robot.tar_pos.y][robot.tar_pos.x] = target_pos
 
     def get_map_info(self, robot: Robot):
         self.pre_robot_x = robot.cur_pos.x
@@ -104,6 +105,14 @@ class Simul_Map(_Map):
         return near_map
 
     def update(self, new_robot_x: int, new_robot_y: int):
+        error = self._check_crush( new_robot_x, new_robot_y )
         self.blocks[self.pre_robot_y][self.pre_robot_x] = non_blocked
         self.blocks[new_robot_y][new_robot_x] = robot_pos
+
+        return error
+
+    def _check_crush(self, new_robot_x: int, new_robot_y: int):
+        if self.blocks[new_robot_y][new_robot_x] == blocked:
+            return ERROR
+        return NOT_ERROR
 

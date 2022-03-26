@@ -1,15 +1,13 @@
 from typing import List
 
-from .types import (
-    robot_pos,
-    blocked,
-    non_blocked
-)
+from .types import *
+
 
 expr_design = {
-    'robot':        '⚉',
-    'detected':     '.',
-    'obstacle':     '🁢',
+    'robot':    '●',
+    'detected': '.',
+    'obstacle': '■',
+    'target':   'x',
 }
 
 
@@ -35,7 +33,10 @@ class Representation_Map(_Representation):
                     print(expr_design['robot'], end="")
                 elif blk == blocked:
                     print(expr_design['obstacle'], end="")
+                elif blk == target_pos:
+                    print(expr_design['target'], end="")
                 else:
                     print(expr_design['detected'], end="")
+
             print()
         print("-" * 32)

@@ -1,13 +1,7 @@
 from typing import List
 
 from .cls import _Robot_Unit
-from .utils.types import (
-    RIGHT,
-    FORWARD,
-    blocked,
-    detected,
-    non_detected
-)
+from .utils.types import *
 
 
 class IR_Sensor:
