@@ -1,7 +1,14 @@
 from typing import List
 
 from .cls import _Robot_Unit
-from .utils.types import RIGHT, FORWARD
+from .utils.types import (
+    RIGHT,
+    FORWARD,
+    blocked,
+    detected,
+    non_detected
+)
+
 
 class IR_Sensor:
     '''
@@ -55,5 +62,5 @@ class IR_Sensor:
             _dir_factor = [0, 0]
 
         pos = [ (_dir_factor[0] + _dir_value[0]), (_dir_factor[1] + _dir_value[1]) ]
-        self.is_detect = simul_map[pos[1]][pos[0]]
+        self.is_detect = detected if simul_map[pos[1]][pos[0]] == blocked else non_detected
 

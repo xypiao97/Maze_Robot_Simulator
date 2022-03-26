@@ -82,11 +82,11 @@ class Simul_Map(_Map):
         super().__init__(x_axis, y_axis, obs_pos)
 
     def init_update(self, robot: Robot):
-        self.blocks[robot.y][robot.x] = robot_pos
+        self.blocks[robot.cur_pos.y][robot.cur_pos.x] = robot_pos
 
     def get_map_info(self, robot: Robot):
-        self.pre_robot_x = robot.x
-        self.pre_robot_y = robot.y
+        self.pre_robot_x = robot.cur_pos.x
+        self.pre_robot_y = robot.cur_pos.y
         near_map = [ [0, 0, 0], [0, 0, 0], [0, 0, 0] ]
 
         for y in range(3):
@@ -94,10 +94,10 @@ class Simul_Map(_Map):
             for x in range(3):
                 _x = x - 1
                 try:
-                    near_map[y][x] = self.blocks[robot.y + _y][robot.x + _x]
-                    if robot.x + _x < 0:
+                    near_map[y][x] = self.blocks[robot.cur_pos.y + _y][robot.cur_pos.x + _x]
+                    if robot.cur_pos.x + _x < 0:
                         near_map[y][x] = blocked
-                    elif robot.y + _y < 0:
+                    elif robot.cur_pos.y + _y < 0:
                         near_map[y][x] = blocked
                 except IndexError:
                     near_map[y][x] = blocked

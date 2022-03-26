@@ -1,6 +1,6 @@
 from math import inf
 
-detected: int = inf
+detected: int = 1
 non_detected: int = 0
 
 FORWARD = 0

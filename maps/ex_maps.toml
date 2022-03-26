@@ -16,3 +16,5 @@ title='Example map'
     num_sensor=3
     x=0
     y=0
+    target_x=5
+    target_y=5

@@ -13,15 +13,25 @@ class Calling{
         }
 };
 
-extern "C" {
-    Calling* Calling_new() {
-        return new Calling();
-    }
-    void Calling_func(Calling* call) { call -> func(); }
 
-    int algorithm(int a, int b) {
-        int c = a * 100 + b * 10 + (a+0);
-        return c;
+extern "C" {
+    int algorithm(
+        int cur_x, int cur_y,
+        int tar_x, int tar_y,
+        int head, int sensor_data
+    ) {
+        // Initialization of essential values
+        int new_x = 0;
+        int new_y = 0;
+        int new_head = 1;
+
+        /*
+            Add your algorithm in here.
+        */
+
+        // Return values
+        int send_data = new_head * 100 + new_x * 10 + new_y;
+        return send_data;
     }
 }
 
